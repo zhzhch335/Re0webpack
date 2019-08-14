@@ -1,7 +1,7 @@
 <template>
   <div id="appFromVue">
     <router-view/>
-    <h2>Hello template!</h2>
+    <h2>Hello template reload !</h2>
     <img src="./assets/thinktwice.png" alt="">
   </div>
 </template>

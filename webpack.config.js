@@ -4,12 +4,19 @@ const path = require("path");
 const PostcssEnv = require("postcss-preset-env");
 
 module.exports = {
+  devtool: 'none',
   entry: {
     appp: "./src/app.js"
   },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
+  },
+  devServer:{
+    contentBase:path.resolve(__dirname,'dist'),
+    port:8100,
+    open:true,
+    hot:true
   },
   module: {
     rules: [
