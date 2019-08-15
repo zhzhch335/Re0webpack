@@ -16,7 +16,10 @@ module.exports = {
     contentBase:path.resolve(__dirname,'dist'),
     port:8100,
     open:true,
-    hot:true
+    hot:true,
+    proxy:{
+      "/api":"http://localhost:8081"
+    }
   },
   module: {
     rules: [

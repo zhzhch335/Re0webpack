@@ -7,9 +7,19 @@
 </template>
 
 <script>
+import axios from "axios";
+import api from "../mock/api";
+
 export default {
-  name:"Appexp"
+  async created(){
+    let res = await axios.get(api.getUserInfo);
+    console.log(res);
+  }
 }
+
+// export default {
+//   name:"Appexp"
+// }
 </script>
 
 <style lang="scss">
