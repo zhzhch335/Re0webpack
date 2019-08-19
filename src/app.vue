@@ -1,8 +1,13 @@
 <template>
   <div id="appFromVue">
-    <router-view/>
-    <h2>Hello template reload !</h2>
-    <img src="./assets/thinktwice.png" alt="">
+    <!-- <img src="./assets/thinktwice.png" alt=""> -->
+    <ul>
+      <li class="ico-l1"></li>
+      <li class="ico-l2"></li>
+      <li class="ico-l3"></li>
+      <li class="ico-l4">a</li>
+    </ul>
+    <router-view />
   </div>
 </template>
 
@@ -11,11 +16,11 @@ import axios from "axios";
 import api from "../mock/api";
 
 export default {
-  async created(){
+  async created() {
     let res = await axios.get(api.getUserInfo);
     console.log(res);
   }
-}
+};
 
 // export default {
 //   name:"Appexp"
@@ -23,9 +28,29 @@ export default {
 </script>
 
 <style lang="scss">
-  $yellow : brown;
-  h2{
-    color: $yellow;
-    background-image: cross-fade( red, yellow, blue);
-  }
+@import "~sprite.scss";
+
+$yellow: brown;
+
+h2 {
+  color: $yellow;
+  background-image: cross-fade(red, yellow, blue);
+}
+
+.ico-l1 {
+  @include sprite($i-linkapp-27);
+}
+
+.ico-l2 {
+  @include sprite($i-linkapp-28);
+}
+
+.ico-l3 {
+  @include sprite($i-linkapp-29);
+}
+
+.ico-l4 {
+  @include sprite($i-linkapp-30);
+}
+
 </style>

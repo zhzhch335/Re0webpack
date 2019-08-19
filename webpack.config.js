@@ -1,10 +1,15 @@
 const VueloaderPlugin = require("vue-loader/lib/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const StyleLintPlugin = require("stylelint-webpack-plugin");
+const SpritesmithPlugin = require("webpack-spritesmith");
 const path = require("path");
 const PostcssEnv = require("postcss-preset-env");
 
 module.exports = {
   devtool: 'none',
+  resolve:{
+    modules:["node_modules","assets/generated"]
+  },
   entry: {
     appp: "./src/app.js"
   },
@@ -17,9 +22,9 @@ module.exports = {
     port:8100,
     open:true,
     hot:true,
-    proxy:{
-      "/api":"http://localhost:8081"
-    }
+    // proxy:{
+    //   "/api":"http://localhost:8081"
+    // }
   },
   module: {
     rules: [
@@ -85,6 +90,15 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test:/\.js|vue$/,
+        exclude:"/node_modules/",
+        enforce:"pre",
+        options:{
+          fomatter:require("eslint-friendly-formatter")
+        },
+        loader:"eslint-loader"
       }
     ],
   },
@@ -93,6 +107,25 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html",
       title: "使用HTML插件自动生成的页面"
+    }),
+    new StyleLintPlugin({
+      files: [
+        "src/**/*.{vue,css,scss,sass}",
+        "!src/assets/generated/"
+      ]
+    }),
+    new SpritesmithPlugin({
+      src:{
+        cwd:path.resolve(__dirname,"src/assets/sprites"),
+        glob: "*.png"
+      },
+      target:{
+        image:path.resolve(__dirname,"src/assets/generated/sprite.png"),
+        css:path.resolve(__dirname,"src/assets/generated/sprite.scss")
+      },
+      apiOptions:{
+        cssImageRef:"~sprite.png"
+      }
     })
   ]
 }

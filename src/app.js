@@ -18,7 +18,9 @@ if(module.hot){
   });
 }
 
-let p = new Promise(function (resolve, reject) {
+let a;// eslint-disable-line no-unused-vars
+
+let p = new Promise(function (resolve) {
   setTimeout(() => {
     resolve("done3");
   }, 1000);
